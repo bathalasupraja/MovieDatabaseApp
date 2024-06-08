@@ -60,12 +60,12 @@ struct Movie: Codable {
     var imdbID: String?
     
     enum CodingKeys: String, CodingKey {
-            case poster = "Poster"
-            case title = "Title"
-            case type = "Type"
-            case year = "Year"
-            case imdbID = "imdbID"
-        }
+        case poster = "Poster"
+        case title = "Title"
+        case type = "Type"
+        case year = "Year"
+        case imdbID = "imdbID"
+    }
 }
 
 struct ResponseData: Codable {
@@ -81,7 +81,7 @@ struct ResponseData: Codable {
 }
 
 class MovieDatabaseHelper {
-
+    
     static var shared = MovieDatabaseHelper()
     
     private init() {
@@ -119,19 +119,20 @@ class MovieDatabaseHelper {
         dataTask.resume()
     }
     
+    
     func getMovieBy(id: String, completion: @escaping(Ratings?, String?) ->()) {
-
+        
         let headers = [
             "x-rapidapi-key": "5705338e54msh3a15410beec2a87p182995jsn2a8d93a73aa7",
             "x-rapidapi-host": "imdb-top-100-movies.p.rapidapi.com"
         ]
-
+        
         let request = NSMutableURLRequest(url: NSURL(string: "https://imdb-top-100-movies.p.rapidapi.com/\(id)")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                            timeoutInterval: 10.0)
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
-
+        
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
@@ -141,7 +142,7 @@ class MovieDatabaseHelper {
                 print(httpResponse)
             }
         })
-
+        
         dataTask.resume()
-        }
+    }
 }
