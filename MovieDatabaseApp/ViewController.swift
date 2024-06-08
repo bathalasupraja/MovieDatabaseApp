@@ -54,6 +54,15 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movie = movies[indexPath.row]
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "MovieNameDatabaseViewController") as? MovieNameDatabaseViewController
+        if let controller {
+            controller.movie = movie
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         80
     }
