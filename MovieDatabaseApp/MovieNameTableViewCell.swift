@@ -37,28 +37,24 @@ class MovieNameTableViewCell: UITableViewCell {
         super.prepareForReuse()
         posterImageView.image = nil
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
     
-    func prepareMovieName(_ movieName: MovieName) {
-        titleLabel.text = movieName.title
-        yearLabel.text = movieName.year
-        ratedLabel.text = movieName.rated
-        releasedLabel.text = movieName.released
-        genreLabel.text = movieName.genre
-        directorLabel.text = movieName.director
-        actorsLabel.text = movieName.actors
-        languageLabel.text = movieName.language
-        awardsLabel.text = movieName.awards
-        languageLabel.text = movieName.language
-        boxOfficeLabel.text = movieName.boxOffice
-        imdbIDLabel.text = movieName.imdbID
+    func prepareMovieDetails(_ movieDetail: MovieDetails) {
+        titleLabel.text = movieDetail.title
+        yearLabel.text = movieDetail.year
+        ratedLabel.text = movieDetail.rated
+        releasedLabel.text = movieDetail.released
+        genreLabel.text = movieDetail.genre
+        directorLabel.text = movieDetail.director
+        actorsLabel.text = movieDetail.actors
+        languageLabel.text = movieDetail.language
+        awardsLabel.text = movieDetail.awards
+        languageLabel.text = movieDetail.language
+        boxOfficeLabel.text = movieDetail.boxOffice
+        imdbIDLabel.text = movieDetail.imdbID
         
         /// Download image
         downloadQueue.async { [weak self] in
-            if let urlString = movieName.poster, let url = URL(string: urlString) {
+            if let urlString = movieDetail.poster, let url = URL(string: urlString) {
                 do {
                     let data = try Data(contentsOf: url)
                     DispatchQueue.main.async { [weak self] in
